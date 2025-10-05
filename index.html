@@ -5,12 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HolisticWell - AI-Powered Wellness Platform</title>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="preload" href="https://unpkg.com/react@18/umd/react.production.min.js" as="script" crossorigin fetchpriority="high">
+    <link rel="preload" href="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" as="script" crossorigin fetchpriority="high">
+    <script defer src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script defer src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script defer src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+    <script defer src="https://cdn.tailwindcss.com" crossorigin></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -52,15 +60,30 @@
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root">
+        <div aria-hidden="true" class="min-h-screen flex items-center justify-center" style="min-height:100vh;display:flex;align-items:center;justify-content:center;">
+            <div class="animate-pulse space-y-3 w-full max-w-3xl p-6" style="width:100%;max-width:48rem;padding:24px;">
+                <div class="h-8 bg-gray-200 rounded w-2/3" style="height:2rem;background:#e5e7eb;border-radius:0.5rem;width:66%"></div>
+                <div class="h-4 bg-gray-200 rounded" style="height:1rem;background:#e5e7eb;border-radius:0.5rem"></div>
+                <div class="h-4 bg-gray-200 rounded w-5/6" style="height:1rem;background:#e5e7eb;border-radius:0.5rem;width:83%"></div>
+                <div class="h-48 bg-gray-200 rounded" style="height:12rem;background:#e5e7eb;border-radius:0.5rem"></div>
+            </div>
+        </div>
+    </div>
+    <noscript>
+        <div style="padding:16px; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+            JavaScript is required to run HolisticWell. Please enable JavaScript.
+        </div>
+    </noscript>
     
-    <script type="text/babel">
+    <script type="text/babel" data-presets="react">
         const { useState, useEffect, useCallback, useMemo, useRef } = React;
 
         // Mock API Services
         class APIService {
+            static SIMULATED_NETWORK_DELAY_MS = 300;
             static async fetchNutritionData(food) {
-                await new Promise(resolve => setTimeout(resolve, 500));
+                await new Promise(resolve => setTimeout(resolve, APIService.SIMULATED_NETWORK_DELAY_MS));
                 const mockData = {
                     'apple': { calories: 52, protein: 0.3, carbs: 14, fat: 0.2, fiber: 2.4, vitamins: ['A', 'C', 'K'] },
                     'chicken': { calories: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0, vitamins: ['B6', 'B12', 'Niacin'] },
@@ -75,7 +98,7 @@
             }
 
             static async generateMealPlan(profile) {
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve => setTimeout(resolve, APIService.SIMULATED_NETWORK_DELAY_MS));
                 const tdee = this.calculateTDEE(profile);
                 
                 return {
@@ -161,7 +184,7 @@
             }
 
             static async getAstrologyReading(profile) {
-                await new Promise(resolve => setTimeout(resolve, 800));
+                await new Promise(resolve => setTimeout(resolve, APIService.SIMULATED_NETWORK_DELAY_MS));
                 const { birthDate, birthTime, birthPlace } = profile;
                 
                 const signs = ['Aries', 'Taurus', 'Gemini', 'Cancer', 'Leo', 'Virgo', 
@@ -186,7 +209,7 @@
             }
 
             static async analyzeDoshas(answers) {
-                await new Promise(resolve => setTimeout(resolve, 600));
+                await new Promise(resolve => setTimeout(resolve, APIService.SIMULATED_NETWORK_DELAY_MS));
                 
                 const vataScore = answers.bodyType === 'thin' ? 3 : 1;
                 const pittaScore = answers.bodyType === 'medium' ? 3 : 1;
@@ -218,7 +241,7 @@
             }
 
             static async generateSchedule(profile, preferences) {
-                await new Promise(resolve => setTimeout(resolve, 700));
+                await new Promise(resolve => setTimeout(resolve, APIService.SIMULATED_NETWORK_DELAY_MS));
                 
                 const schedule = [];
                 const { wakeTime, sleepTime, workStart, workEnd, meals, exercise, spiritual } = preferences;
@@ -2569,8 +2592,28 @@
             );
         };
 
-        // Render the app
-        ReactDOM.render(<WellnessApp />, document.getElementById('root'));
+        // Render the app - React 18 createRoot with idle mount fallback
+        const mount = () => {
+            const container = document.getElementById('root');
+            if (!container) return;
+            if (ReactDOM.createRoot) {
+                ReactDOM.createRoot(container).render(<WellnessApp />);
+            } else {
+                ReactDOM.render(<WellnessApp />, container);
+            }
+        };
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(mount, { timeout: 1000 });
+        } else {
+            setTimeout(mount, 0);
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            });
+        }
     </script>
 </body>
 </html>
