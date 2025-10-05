@@ -5,11 +5,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HolisticWell - AI-Powered Wellness Platform</title>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
+
+    <!-- Performance: preconnect and dns-prefetch for CDNs -->
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- PWA & Icons -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#764ba2">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="mask-icon" href="/favicon.svg" color="#764ba2">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.svg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://example.com/">
+
+    <!-- SEO -->
+    <meta name="description" content="AI-powered holistic wellness: personalized nutrition, schedules, and spiritual insights.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="HolisticWell - AI-Powered Wellness Platform">
+    <meta property="og:description" content="AI-powered holistic wellness: personalized nutrition, schedules, and spiritual insights.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:image" content="/icons/icon-512x512.svg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HolisticWell - AI-Powered Wellness Platform">
+    <meta name="twitter:description" content="AI-powered holistic wellness: personalized nutrition, schedules, and spiritual insights.">
+    <meta name="twitter:image" content="/icons/icon-512x512.svg">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "HolisticWell",
+      "url": "https://example.com/",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "description": "AI-powered holistic wellness: personalized nutrition, schedules, and spiritual insights."
+    }
+    </script>
+
+    <!-- Libraries (deferred) -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" defer></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" defer></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js" defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         @keyframes fadeIn {
@@ -52,6 +102,11 @@
     </style>
 </head>
 <body>
+    <noscript>
+        <div style="padding:1rem;background:#fff3cd;color:#5c3c00;text-align:center;font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+            JavaScript is required to use HolisticWell. Please enable it and reload.
+        </div>
+    </noscript>
     <div id="root"></div>
     
     <script type="text/babel">
@@ -2571,6 +2626,17 @@
 
         // Render the app
         ReactDOM.render(<WellnessApp />, document.getElementById('root'));
+    </script>
+
+    <!-- Register Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').catch(function(err) {
+            console.debug('Service worker registration failed', err);
+          });
+        });
+      }
     </script>
 </body>
 </html>
